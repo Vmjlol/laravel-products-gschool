@@ -19,14 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => '/product'], function(){
-    Route::post('/test', [ProductController::class, 'test']);
-    Route::get('/list', [ProductController::class, 'test']);
-    Route::put('/{id}', [ProductController::class, 'test']);
-    Route::delete('/{id}', [ProductController::class, 'test']);
+Route::controller(ProductController::class)->prefix('/product')->group(function () {
+    Route::post('/test', 'test');
+    Route::get('/list', 'test');
+    Route::put('/{id}', 'test');
+    Route::delete('/{id}', 'test');
 });
-
-
 
 //camelCase
 //PascalCase
