@@ -2,18 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    
-    public function test(Request $request) {
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
 
-         $name = $request->input('name');
-         $age = $request->input('age');
+        $products = DB::table('products')->simplePaginate(1);
+        // return response()->json(json_decode($products), 200, [], JSON_PRETTY_PRINT);
+        // $products = DB::table('products')->simplePaginate(15);
 
-        // return 'Meu nome é ' . $request->input('name').' e tenho '.$request->input('age') .' anos';
-        return "Meu nome é $name e tenho $age anos";
+        return $products;
+        
+    }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        return Product::create($request->input());
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Product $product)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Product $product)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Product $product)
+    {
+        //
     }
 }
