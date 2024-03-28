@@ -20,8 +20,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/product', [ProductController::class, 'store']);
-Route::get('/product', [ProductController::class, 'index']);
+// Route::post('/product', [ProductController::class, 'store']);
+// Route::get('/product', [ProductController::class, 'index']);
+// Route::get('/product/{product}', [ProductController::class, 'show']);
+
+Route::prefix('product')->controller(ProductController::class)->group(function() {
+    Route::post('', 'store');
+    Route::get('/', 'index');
+    Route::get('/{product}', 'show');
+    Route::put('/{product}', 'update');
+    Route::delete('/{product}', 'destroy');
+});
+
+
 
 //camelCase
 //PascalCase
